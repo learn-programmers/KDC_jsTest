@@ -1,0 +1,98 @@
+{
+  "config": {
+    "target": "your-deployed-app.com/api",
+    "phases": [
+      {"duration": 60, "arrivalRate": 10}
+    ],
+    "defaults": {
+      "headers": {
+        "User-Agent": "Artillery"
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "name": "ListGif",
+      "flow": [
+        {
+          "get": {
+            "url": "/gif/all",
+            "qs": {
+              "page": 2
+            }
+          }
+        }, {
+          "get": {
+            "url": "/gif/all",
+            "qs": {
+              "page": 4
+            }
+          }
+        }, {
+          "get": {
+            "url": "/gif/all",
+            "qs": {
+              "page": 465
+            }
+          }
+        }
+      ]
+    }, {
+      "name": "GetRandom50Gif",
+      "flow": [
+        {
+          "get": {
+            "url": "/gif/random50"
+          }
+        }, {
+          "get": {
+            "url": "/gif/random50"
+          }
+        }
+      ]
+    }, {
+      "name": "SearchGifs",
+      "flow": [
+        {
+          "get": {
+            "url": "/gif/search",
+            "qs": {
+              "q": "hoo"
+            }
+          }
+        }, {
+          "get": {
+            "url": "/gif/search",
+            "qs": {
+              "q": "love"
+            }
+          }
+        }, {
+          "get": {
+            "url": "/gif/search",
+            "qs": {
+              "q": "happy"
+            }
+          }
+        }
+      ]
+    }, {
+      "name": "GetGif",
+      "flow": [
+        {
+          "get": {
+            "url": "/gif/62DHZ8vnI7ju8"
+          }
+        }, {
+          "get": {
+            "url": "/gif/l3vQXn15dRVNMru7e"
+          }
+        }, {
+          "get": {
+            "url": "/gif/joov9N2IrkDfO"
+          }
+        }
+      ]
+    }
+  ]
+}
