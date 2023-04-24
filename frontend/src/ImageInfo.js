@@ -1,3 +1,5 @@
+import api from './api.js';
+
 class ImageInfo {
   $imageInfo = null;
   data = null;
@@ -16,11 +18,38 @@ class ImageInfo {
   setState(nextData) {
     this.data = nextData;
     this.render();
+    this.setFade(nextData.visible);
+  }
+
+  setFade(visible) {
+    if (visible) {
+      this.$imageInfo.classList.add('show');
+    } else {
+      this.$imageInfo.classList.remove('show');
+    }
+  }
+
+  async showDetail(data) {
+    const detailInfo = await api.fetchCatDetail(data.cat.id);
+
+    if (detailInfo) {
+      this.setState({
+        visible: true,
+        cat: detailInfo.data
+      });
+    }
+  }
+
+  closeImageInfo() {
+    this.setState({
+      visible: false,
+      cat: undefined
+    });
   }
 
   render() {
     if (this.data.visible) {
-      const { name, url, temperament, origin } = this.data.image;
+      const { name, url, temperament, origin } = this.data.cat;
 
       this.$imageInfo.innerHTML = `
         <div class="content-wrapper">
@@ -34,9 +63,25 @@ class ImageInfo {
             <div>태생: ${origin}</div>
           </div>
         </div>`;
-      this.$imageInfo.style.display = "block";
+      // this.$imageInfo.style.display = "block";
+
+      // TODO: keypress, keydown, keyup 차이 리서치
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.closeImageInfo();
+        }
+      });
+      this.$imageInfo.addEventListener('click', (e) => {
+        if (e.target.className === 'ImageInfo' || e.target.className === 'close') {
+          this.closeImageInfo();
+        }
+      });
+      
     } else {
-      this.$imageInfo.style.display = "none";
+      // this.$imageInfo.style.display = "none";
     }
+    
   }
 }
+
+export default ImageInfo;

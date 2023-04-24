@@ -5,6 +5,16 @@
   font-style: normal;
 }
 
+:root[color-mode="dark"] {
+  --background: #000;
+  --textColor: white;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--textColor);
+}
+
 html {
   box-sizing: border-box;
 }
@@ -30,11 +40,13 @@ body * {
   display: grid;
   grid-template-columns: repeat(4, minmax(250px, 1fr));
   grid-gap: 10px;
+  padding: 0;
 }
 
 .SearchResult img {
   width: 100%;
   height: 100%;
+  min-height: 300px;
   object-fit: cover;
 }
 
@@ -43,12 +55,65 @@ body * {
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.SearchResult .item .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.3);
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+  opacity: 0;
+  transition: all .5s ease;
+}
+
+.SearchResult .item:hover .content {
+  opacity: 1;
+}
+
+.SearchInputSection {
+  position: relative;
+}
+
+.KeywordHistroy {
+  display: none;
+  position: absolute;
+  top: 75px;
+  left: 0;
+  width: 100%;
+  background: #000;
+  margin: 0;
+  padding: 20px;
+}
+
+.SearchInputSection:hover .KeywordHistroy {
+  display: block;
 }
 
 .SearchInput {
-  width: 100%;
+  width: 70%;
   font-size: 40px;
   padding: 10px 15px;
+}
+
+.LimitCount {
+  width: 10%;
+  height: 75px;
+  vertical-align: top;
+  font-size: 20px;
+}
+
+.RandomButton {
+  width: 18%;
+  font-size: 40px;
+  padding: 10px 15px;
+  cursor: pointer;
 }
 
 .ImageInfo {
@@ -58,6 +123,14 @@ body * {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s ease;
+}
+
+.ImageInfo.show {
+  visibility: visible;
+  opacity: 1;
 }
 
 .ImageInfo .title {
@@ -75,7 +148,7 @@ body * {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--background);
   border: 1px solid #eee;
   border-radius: 5px;
 }
@@ -84,11 +157,103 @@ body * {
   width: 100%;
 }
 
-/* dark mode 처리
-@media (prefers-color-scheme: dark) {
+.DarkModeToggle {
+  width: 30px;
+  height: 30px;
+}
+
+.Loading {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,.3);
+}
+
+.Loading p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+}
+
+.Empty {
+  text-align: center;
+  font-size: 30px;  
+  padding: 100px 0;
+}
+
+.Banner {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.Banner ul {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  transition: all .3s ease;
+}
+
+.Banner ul li {
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 300px;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.Banner button {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+}
+
+.Banner .prev {
+  left: 10px;
+}
+
+.Banner .next {
+  right: 10px;
+}
+
+@media screen and (max-width: 992px) {
+  .SearchResult {
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .SearchResult {
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+  }
+
+  .ImageInfo .content-wrapper {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .SearchResult {
+    grid-template-columns: repeat(1, minmax(250px, 1fr));
+  }
+}
+
+
+
+/* dark mode 처리 */
+/* @media (prefers-color-scheme: dark) {
   body {
     background-color: #000;
     color: white;
   }
-}
-*?
+} */

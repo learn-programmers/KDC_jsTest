@@ -18,8 +18,8 @@
 }));
 
 // NOTE: Uncomment below lines, if you using es6 module.
-// export default {
-//   isNumber(a) {
-//     return typeof a === 'number'
-//   }
-// }
+export default {
+  isNumber(a) {
+    return typeof a === 'number'
+  }
+}
