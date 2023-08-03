@@ -5,12 +5,22 @@
   font-style: normal;
 }
 
+:root[color-mode="dark"] {
+  --background: #000;
+  --color: white;
+}
+
 html {
   box-sizing: border-box;
 }
 
 body * {
   font-family: Goyang;
+}
+
+body {
+  background: var(--background);
+  color: var(--color);
 }
 
 *,
