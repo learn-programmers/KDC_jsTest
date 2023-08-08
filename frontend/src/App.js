@@ -28,13 +28,16 @@ class App {
           this.loading.hide();
         });
       },
+    });
+
+    this.randomSearchButton = new RandomSearchButton({
+      $target,
       onRandomSearch: () => {
         //show
         this.loading.show();
 
         api.fetchRandomCats().then(({ data }) => {
           this.setState(data);
-
           //hide
           this.loading.hide();
         });
