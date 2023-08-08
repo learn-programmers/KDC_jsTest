@@ -74,9 +74,14 @@ body {
 }
 
 .SearchInput {
-  width: 100%;
+  width: 85%;
   font-size: 40px;
   padding: 10px 15px;
+}
+
+.RandomButton {
+  font-size: 40px;
+  cursor: pointer;
 }
 
 .ImageInfo {
@@ -111,10 +116,18 @@ body {
 .ImageInfo .content-wrapper img {
   width: 100%;
 }
+@media screen and (max-width: 1212px) {
+  .SearchInput {
+    width: 80%;
+  }
+}
 
 @media screen and (max-width: 992px) {
   .SearchResult {
     grid-template-columns: repeat(3, minmax(250px, 1fr));
+  }
+  .SearchInput {
+    width: 75%;
   }
 }
 @media screen and (max-width: 768px) {

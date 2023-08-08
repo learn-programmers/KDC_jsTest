@@ -28,6 +28,17 @@ class App {
           this.loading.hide();
         });
       },
+      onRandomSearch: () => {
+        //show
+        this.loading.show();
+
+        api.fetchRandomCats().then(({ data }) => {
+          this.setState(data);
+
+          //hide
+          this.loading.hide();
+        });
+      },
     });
 
     this.searchResult = new SearchResult({
